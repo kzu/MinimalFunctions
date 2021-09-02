@@ -6,14 +6,10 @@
     <ImportNuGetBuildTasksPackTargetsFromSdk>false</ImportNuGetBuildTasksPackTargetsFromSdk>
 
     <IsPackable>false</IsPackable>
-    <PublishDir>../www/api</PublishDir>
+    <PublishDir>$(MSBuildThisFileDirectory)../www/api</PublishDir>
+
+    <ScopedCssEnabled>false</ScopedCssEnabled>
+    <StaticWebAssetsEnabled>false</StaticWebAssetsEnabled>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectCapability Include="Pack" />
-  </ItemGroup>
-
-  <Target Name="Pack" DependsOnTargets="Publish" />
-  <Target Name="PublishOnBuild" AfterTargets="Build" DependsOnTargets="Publish" />
 
 </Project>
