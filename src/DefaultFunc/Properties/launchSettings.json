@@ -1,12 +1,25 @@
 {
   "profiles": {
-    "DefaultFunc": {
-      "commandName": "Project",
-      "launchBrowser": true,
+    "Run": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Microsoft\\Azure Functions Core Tools\\func.exe",
+      "commandLineArgs": "host start --dotnet-isolated",
+      "workingDirectory": "$(OutputPath)",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNET_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+      "authenticationMode": "None"
+    },
+    "Debug": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Microsoft\\Azure Functions Core Tools\\func.exe",
+      "commandLineArgs": "host start --dotnet-isolated",
+      "workingDirectory": "$(OutputPath)",
+      "environmentVariables": {
+        "ASPNET_ENVIRONMENT": "Development",
+        "ATTACH_DEBUGGER": "true"
+      },
+      "authenticationMode": "None"
     }
   }
 }

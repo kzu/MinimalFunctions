@@ -12,6 +12,7 @@
     <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.0.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.13" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.0.1" OutputItemType="Analyzer" />
+    <PackageReference Include="DotNetConfig.Configuration" Version="1.0.6" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +20,7 @@
     <None Update="local.settings.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="Never" />
     <None Update="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="appsettings.*.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="proxies.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
