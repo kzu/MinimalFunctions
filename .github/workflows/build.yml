@@ -59,6 +59,4 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: 🚀 deploy
-        run: | 
-          az functionapp deployment source config-zip --subscription 3038cf8f-a3bf-498b-ae70-4c0f2ea60277 -g minimalisolated -n minimalisolated --src ./api.zip
-          az functionapp deployment source config-zip --subscription 3038cf8f-a3bf-498b-ae70-4c0f2ea60277 -g minimalisolated -n minimalubuntu --src ./api.zip
+        run: az functionapp deployment source config-zip --subscription ${{ secrets.AZURE_SUBSCRIPTION }} -g minimalfunction -n ${{ secrets.AZURE_APPNAME }} --src ./api.zip
