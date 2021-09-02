@@ -1,11 +1,21 @@
-var builder = WebApplication.CreateBuilder(args);
-builder.Host.ConfigureFunctionsWorkerDefaults();
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Hosting;
 
-var app = builder.Build();
+var host = new HostBuilder()
+    .ConfigureFunctionsWorkerDefaults()
+    .ConfigureServices(s =>
+    {
+    })
+    .ConfigureLogging(l =>
+    {
+    })
+    .Build();
 
-if (app.Environment.IsDevelopment())
-    app.UseDeveloperExceptionPage();
+await host.RunAsync();
 
-app.MapGet("/", () => "Hello World!");
+[Function("GetPerson")]
+Person GetPerson([HttpTrigger(AuthorizationLevel.Anonymous, "GET", "/person")] HttpRequestData req, FunctionContext context) 
+    => new Person("Daniel", "Cazzulino");
 
-app.Run();
+record Person(string FirstName, string LastName);
