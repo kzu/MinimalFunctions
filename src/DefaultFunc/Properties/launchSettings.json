@@ -1,25 +1,23 @@
 {
   "profiles": {
+    "Default": {
+      "commandName": "Project",
+      "workingDirectory": "$(OutputPath)"
+    },
     "Run": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\Microsoft\\Azure Functions Core Tools\\func.exe",
+      "executablePath": "C:\\Users\\danie\\AppData\\Roaming\\npm\\func.cmd",
       "commandLineArgs": "host start --dotnet-isolated",
-      "workingDirectory": "$(OutputPath)",
-      "environmentVariables": {
-        "ASPNET_ENVIRONMENT": "Development"
-      },
-      "authenticationMode": "None"
+      "workingDirectory": "$(OutputPath)"
     },
     "Debug": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\Microsoft\\Azure Functions Core Tools\\func.exe",
+      "executablePath": "C:\\Users\\danie\\AppData\\Roaming\\npm\\func.cmd",
       "commandLineArgs": "host start --dotnet-isolated",
       "workingDirectory": "$(OutputPath)",
       "environmentVariables": {
-        "ASPNET_ENVIRONMENT": "Development",
         "ATTACH_DEBUGGER": "true"
-      },
-      "authenticationMode": "None"
+      }
     }
   }
 }
