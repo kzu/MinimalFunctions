@@ -4,8 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>preview</LangVersion>
     <OutputType>Exe</OutputType>
+    <AzureFunctionsVersion>v3</AzureFunctionsVersion>
     <_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>
-    <_FunctionsExtensionTargetFramework>netstandard2.1</_FunctionsExtensionTargetFramework>
   </PropertyGroup>
   
   <ItemGroup>
