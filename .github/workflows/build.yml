@@ -22,49 +22,37 @@ defaults:
     shell: bash
 
 jobs:
-  dotnet-format:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🤘 checkout
-        uses: actions/checkout@v2
-        with: 
-          submodules: recursive
-          fetch-depth: 0
-
-      - name: ✓ ensure format
-        run: |
-          dotnet tool update -g dotnet-format --version 5.0.*
-          dotnet restore
-          dotnet format --check -v:diag
-
   build:
-    name: build-${{ matrix.os }}
-    needs: dotnet-format
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+    runs-on: windows-latest
     steps:
       - name: 🤘 checkout
         uses: actions/checkout@v2
         with: 
           submodules: recursive
           fetch-depth: 0
+
+      - name: ⚙ dotnet 6.0.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+          include-prerelease: true
 
       - name: 🙏 build
         run: dotnet build -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
 
-      - name: 🧪 test
-        run: dotnet test --no-build -m:1 --blame-hang --blame-hang-timeout 5m
-
-      - name: 📦 pack
-        run: dotnet pack -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
-
-      # Only push CI package to sleet feed if building on ubuntu (fastest)
-      - name: 🚀 sleet
-        env:
-          SLEET_CONNECTION: ${{ secrets.SLEET_CONNECTION }}
-        if: matrix.os == 'ubuntu-latest' && env.SLEET_CONNECTION != ''
+      - name: 🗜 zip
+        if: github.ref == 'refs/heads/main'
         run: |
-          dotnet tool install -g --version 4.0.18 sleet 
-          sleet push bin --config none -f --verbose -p "SLEET_FEED_CONTAINER=nuget" -p "SLEET_FEED_CONNECTIONSTRING=${{ secrets.SLEET_CONNECTION }}" -p "SLEET_FEED_TYPE=azure" || echo "No packages found"
+          sudo apt install zip -y
+          pushd ./www/api
+          zip -r ../../api.zip .
+
+      - name: 🔓 login
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 🚀 deploy
+        run: | 
+          az functionapp deployment source config-zip -g minimalisolated -n minimalisolated --src ./api.zip

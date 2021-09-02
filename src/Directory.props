@@ -1,0 +1,19 @@
+<Project>
+
+  <PropertyGroup>
+    <DefineConstants Condition="$(CI)">CI;$(DefineConstants)</DefineConstants>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <ImportNuGetBuildTasksPackTargetsFromSdk>false</ImportNuGetBuildTasksPackTargetsFromSdk>
+
+    <IsPackable>false</IsPackable>
+    <PublishDir>../www/api</PublishDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectCapability Include="Pack" />
+  </ItemGroup>
+
+  <Target Name="Pack" DependsOnTargets="Publish" />
+  <Target Name="PublishOnBuild" AfterTargets="Build" DependsOnTargets="Publish" />
+
+</Project>
