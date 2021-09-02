@@ -60,4 +60,5 @@ jobs:
 
       - name: 🚀 deploy
         run: | 
+          az account set -s 3038cf8f-a3bf-498b-ae70-4c0f2ea60277
           az functionapp deployment source config-zip -g minimalisolated -n minimalisolated --src ./api.zip
