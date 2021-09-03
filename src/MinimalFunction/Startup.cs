@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 
@@ -8,16 +7,13 @@ public class Startup : FunctionsStartup
 {
     public override void ConfigureAppConfiguration(IFunctionsConfigurationBuilder config) 
     {
-        if (bool.TryParse(Environment.GetEnvironmentVariable("ATTACH_DEBUGGER"), out var attach) && attach)
-            Debugger.Launch();
-
         var context = config.GetContext();
         var env = context.EnvironmentName;
         var appPath = context.ApplicationRootPath;
 
         config.ConfigurationBuilder
                 .AddJsonFile(Path.Combine(appPath, "appsettings.json"), optional: true, reloadOnChange: false)
-                .AddDotNetConfig()
+                .AddDotNetConfig(appPath)
                 .AddJsonFile(Path.Combine(appPath, $"appsettings.{env}.json"), optional: true, reloadOnChange: true)
                 .AddJsonFile(Path.Combine(appPath, "local.settings.json"), optional: true, reloadOnChange: true);
     }

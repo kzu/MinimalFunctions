@@ -1,23 +1,8 @@
 {
   "profiles": {
-    "Default": {
+    "Run": {
       "commandName": "Project",
       "workingDirectory": "$(OutputPath)"
-    },
-    "Run": {
-      "commandName": "Executable",
-      "executablePath": "C:\\Users\\danie\\AppData\\Roaming\\npm\\func.cmd",
-      "commandLineArgs": "host start --dotnet-isolated",
-      "workingDirectory": "$(OutputPath)"
-    },
-    "Debug": {
-      "commandName": "Executable",
-      "executablePath": "C:\\Users\\danie\\AppData\\Roaming\\npm\\func.cmd",
-      "commandLineArgs": "host start --dotnet-isolated",
-      "workingDirectory": "$(OutputPath)",
-      "environmentVariables": {
-        "ATTACH_DEBUGGER": "true"
-      }
     }
   }
 }
