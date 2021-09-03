@@ -45,12 +45,8 @@ jobs:
       - name: 🙏 build
         run: dotnet build -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
 
-      - name: 🗜 zip
-        if: github.ref == 'refs/heads/main'
-        run: |
-          sudo apt install zip -y
-          pushd ./www/api
-          zip -r ../../api.zip .
+      - name: ⚙ func 4.x
+        run: npm i -g azure-functions-core-tools@4 --unsafe-perm true  
 
       - name: 🔓 login
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
@@ -60,5 +56,5 @@ jobs:
 
       - name: 🚀 deploy
         run: |
-          az functionapp deployment source config-zip --subscription ${{ secrets.AZURE_SUBSCRIPTION }} -g minimalfunction -n ${{ secrets.AZURE_APPNAME }} --src ./api.zip
-          az functionapp deployment source config-zip --subscription ${{ secrets.AZURE_SUBSCRIPTION }} -g minimalfunction -n minimalfunction2 --src ./api.zip
+          pushd ./src/DefaultFunc
+          func azure functionapp publish ${{ secrets.AZURE_APPNAME }}
