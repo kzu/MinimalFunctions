@@ -16,25 +16,6 @@ Steps to get (this) end-to-end .NET6 function running in Azure Functions:
    Note the use of the resource group as the scope, *not* just the web app (didn't work with that for me).
 1. Copy the resulting json and set it as a repository secret named `AZURE_CREDENTIALS`
 1. Add another repository secret named `AZURE_APPNAME` with your function app name for deployment
-1. Set the following MSBuild properties on your functions project:
-
-    ```xml
-        <TargetFramework>net6.0</TargetFramework>
-        <AzureFunctionsVersion>v3</AzureFunctionsVersion>
-        <RuntimeFrameworkVersion>5.0.7</RuntimeFrameworkVersion>
-        <RuntimeIdentifier>win10-x86</RuntimeIdentifier>
-        <SelfContained>true</SelfContained>
-    ```
-
-    In my case, I used a conditional property group for the additional deployment properties since otherwise 
-    those pollute the local build:
-
-    ```xml
-      <PropertyGroup Condition="$(CI)">
-        ...
-      </PropertyGroup>
-    ```
-
 1. The build script needs to install func v4 with `npm i -g azure-functions-core-tools@4 --unsafe-perm true`, 
    and then do the publish with `func azure functionapp publish ${{ secrets.AZURE_APPNAME }} --force`. 
    
