@@ -5,12 +5,7 @@
     <DefineConstants Condition="$(CI)">CI;$(DefineConstants)</DefineConstants>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <ImportNuGetBuildTasksPackTargetsFromSdk>false</ImportNuGetBuildTasksPackTargetsFromSdk>
-
     <IsPackable>false</IsPackable>
-    <PublishDir>$(MSBuildThisFileDirectory)../www/api</PublishDir>
-
-    <ScopedCssEnabled>false</ScopedCssEnabled>
-    <StaticWebAssetsEnabled>false</StaticWebAssetsEnabled>
   </PropertyGroup>
 
 </Project>

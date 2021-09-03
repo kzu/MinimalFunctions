@@ -27,4 +27,12 @@
     <None Update="proxies.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="System.Runtime.InteropServices" />
+    <Using Include="Microsoft.Azure.WebJobs" />
+    <Using Include="Microsoft.Azure.WebJobs.Extensions.Http" />
+    <Using Include="Microsoft.Extensions.Logging" />
+    <Import Include="@(Using)" />
+  </ItemGroup>
+  
 </Project>

@@ -1,6 +1,11 @@
 # MinimalFunctions
 
-Azure Functions app from multiple ASP.NET Core minimal APIs
+(Mostly) Minimal .NET 6.0 (preview) APIs in Azure Functions
+
+End-to-end example of building and deploying .NET 6 APIs to 
+Azure Functions (current stable, v3) runtime using GitHub 
+actions.
+
 
 Steps to get (this) end-to-end .NET6 function running in Azure Functions:
 
