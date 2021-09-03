@@ -6,8 +6,6 @@
     <RuntimeFrameworkVersion>5.0.7</RuntimeFrameworkVersion>
     <RuntimeIdentifier>win10-x86</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>
   </PropertyGroup>
   
   <ItemGroup>

@@ -6,7 +6,6 @@ Steps to get (this) end-to-end .NET6 function running in Azure Functions:
 
 1. Fork this repo
 1. Create a Functions app using a new resource group named `minimalfunction`, .NET 3.1 runtime, Windows hosting
-1. Under Configuration, set `FUNCTIONS_EXTENSION_VERSION=~4`
 1. Using the Azure CLI, [create credentials](https://github.com/Azure/functions-action#using-azure-service-principal-for-rbac-as-deployment-credential) for the deployment with:
    `az ad sp create-for-rbac --name minimalfunction --role contributor --scopes "/subscriptions/[SUBSCRIPTION_ID]/resourceGroups/minimalfunction" --sdk-auth`
    Note the use of the resource group as the scope, *not* just the web app (didn't work with that for me).
@@ -20,7 +19,6 @@ Steps to get (this) end-to-end .NET6 function running in Azure Functions:
     <RuntimeFrameworkVersion>5.0.7</RuntimeFrameworkVersion>
     <RuntimeIdentifier>win10-x86</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
-    <_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>
 ```
 
 For convenience, I'm setting [PublishDir](https://github.com/kzu/MinimalFunctions/blob/main/src/Directory.props#L10) and 
