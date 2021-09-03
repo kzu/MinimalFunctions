@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
-    <RuntimeFrameworkVersion>5.0.0</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>5.0.7</RuntimeFrameworkVersion>
     <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
