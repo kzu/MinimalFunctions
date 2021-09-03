@@ -1,6 +1,3 @@
 <Project>
 
-  <Target Name="Pack" />
-  <Target Name="PublishOnBuild" AfterTargets="Build" DependsOnTargets="Publish" />
-
 </Project>

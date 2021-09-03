@@ -55,6 +55,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: 🚀 deploy
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
         run: |
-          pushd ./src/DefaultFunc
+          pushd ./src/MinimalFunction
           func azure functionapp publish ${{ secrets.AZURE_APPNAME }}
