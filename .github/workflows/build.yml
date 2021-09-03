@@ -42,9 +42,6 @@ jobs:
         with:
           dotnet-version: '3.1.x'
 
-      - name: 🙏 build
-        run: dotnet build -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
-
       - name: ⚙ func 4.x
         run: npm i -g azure-functions-core-tools@4 --unsafe-perm true  
 
@@ -58,4 +55,4 @@ jobs:
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
         run: |
           pushd ./src/MinimalFunction
-          func azure functionapp publish ${{ secrets.AZURE_APPNAME }} --force
+          func azure functionapp publish ${{ secrets.AZURE_APPNAME }} --force -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
