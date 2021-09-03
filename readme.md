@@ -13,15 +13,25 @@ Steps to get (this) end-to-end .NET6 function running in Azure Functions:
 1. Add another repository secret named `AZURE_APPNAME` with your function app name for deployment
 1. Set the following MSBuild properties on your functions project:
 
-```xml
-    <TargetFramework>net6.0</TargetFramework>
-    <AzureFunctionsVersion>v3</AzureFunctionsVersion>
-    <RuntimeFrameworkVersion>5.0.7</RuntimeFrameworkVersion>
-    <RuntimeIdentifier>win10-x86</RuntimeIdentifier>
-    <SelfContained>true</SelfContained>
-```
+    ```xml
+        <TargetFramework>net6.0</TargetFramework>
+        <AzureFunctionsVersion>v3</AzureFunctionsVersion>
+        <RuntimeFrameworkVersion>5.0.7</RuntimeFrameworkVersion>
+        <RuntimeIdentifier>win10-x86</RuntimeIdentifier>
+        <SelfContained>true</SelfContained>
+    ```
 
-For convenience, I'm setting [PublishDir](https://github.com/kzu/MinimalFunctions/blob/main/src/Directory.props#L10) and 
-forcing a [publish on build](https://github.com/kzu/MinimalFunctions/blob/main/src/Directory.targets#L4). The build 
-script then just needs to [zip the folder](https://github.com/kzu/MinimalFunctions/blob/main/.github/workflows/build.yml#L48-L53) 
-and [deploy it with a one-liner](https://github.com/kzu/MinimalFunctions/blob/main/.github/workflows/build.yml#L61-L62).
+    In my case, I used a conditional property group for the additional deployment properties since otherwise 
+    those pollute the local build:
+
+    ```xml
+      <PropertyGroup Condition="$(CI)">
+        ...
+      </PropertyGroup>
+    ```
+
+1. The build script needs to install func v4 with `npm i -g azure-functions-core-tools@4 --unsafe-perm true`, 
+   and then do the publish with `func azure functionapp publish ${{ secrets.AZURE_APPNAME }} --force`. 
+   
+   > Using `--no-build` [option](https://docs.microsoft.com/en-us/azure/azure-functions/functions-core-tools-reference?tabs=v2#func-azure-functionapp-publish) didn't work for me.
+   > Additional build args can be passed at the end with `--dotnet-cli-params -- -p:PROP=VALUE ...`.
