@@ -46,13 +46,12 @@ jobs:
         run: npm i -g azure-functions-core-tools@4 --unsafe-perm true  
 
       - name: 🔓 login
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
+        if: github.ref == 'refs/heads/main'
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: 🚀 deploy
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
-        run: |
-          pushd ./src/MinimalFunction
-          func azure functionapp publish ${{ secrets.AZURE_APPNAME }} --force --dotnet-cli-params -- -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
+        if: github.ref == 'refs/heads/main'
+        working-directory: ./src/MinimalFunction
+        run: func azure functionapp publish ${{ secrets.AZURE_APPNAME }} --force --dotnet-cli-params -- -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
