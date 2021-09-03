@@ -55,4 +55,4 @@ jobs:
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
         run: |
           pushd ./src/MinimalFunction
-          func azure functionapp publish ${{ secrets.AZURE_APPNAME }} --force -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
+          func azure functionapp publish ${{ secrets.AZURE_APPNAME }} --force --dotnet-cli-params -- "-p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
