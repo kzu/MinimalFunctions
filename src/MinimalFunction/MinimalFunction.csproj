@@ -5,13 +5,6 @@
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
   </PropertyGroup>
 
-  <!-- Don't pollute local builds with unnecessary stuff -->
-  <PropertyGroup Condition="$(CI)">
-    <RuntimeFrameworkVersion>5.0.7</RuntimeFrameworkVersion>
-    <RuntimeIdentifier>win10-x86</RuntimeIdentifier>
-    <SelfContained>true</SelfContained>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.11" />
