@@ -4,8 +4,7 @@
     <LangVersion>preview</LangVersion>
     <DefineConstants Condition="$(CI)">CI;$(DefineConstants)</DefineConstants>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
-    <ImportNuGetBuildTasksPackTargetsFromSdk>false</ImportNuGetBuildTasksPackTargetsFromSdk>
-    <IsPackable>false</IsPackable>
+    <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
 
 </Project>

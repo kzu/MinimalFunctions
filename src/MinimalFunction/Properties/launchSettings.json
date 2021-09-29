@@ -1,8 +1,13 @@
 {
   "profiles": {
     "Run": {
-      "commandName": "Project",
-      "workingDirectory": "$(OutputPath)"
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\nodejs\\npx.cmd",
+      "commandLineArgs": "func start --useHttps --cert certificate.pfx --password minimalfunction",
+      "workingDirectory": "$(OutputPath)",
+      "environmentVariables": {
+        //"ATTACH_DEBUGGER": "true"
+      }
     }
   }
 }
