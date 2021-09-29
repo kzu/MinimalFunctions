@@ -1,9 +1,8 @@
-www
-
 bin
 obj
 artifacts
 pack
+TestResults
 .vs
 .vscode
 
